@@ -7,4 +7,4 @@ SHA1=$1
 docker push danielnbarbosa/docker-dogstatsd
 
 # Deploy to CoreOS cluster
-ssh core@54.67.14.65 -C 'fleetctl stop datadaog-dogstatsd@{1..3}.service; fleetctl start datadog-dogstatsd@{1..3}.service'
+ssh core@54.67.14.65 -C 'fleetctl stop datadog-dogstatsd@{1..3}.service; fleetctl start datadog-dogstatsd@{1..3}.service'
