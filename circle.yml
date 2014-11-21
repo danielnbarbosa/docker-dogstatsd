@@ -14,7 +14,7 @@ dependencies:
 
 test:
   override:
-    - /usr/bin/bash -c "/usr/bin/docker run -d --privileged --name dogstatsd -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/mounts:/host/proc/mounts:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=foo danielnbarbosa/docker-dogstatsd"
+    - /bin/bash -c "/usr/bin/docker run -d --privileged --name dogstatsd -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/mounts:/host/proc/mounts:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=foo danielnbarbosa/docker-dogstatsd"
 
 deployment:
   coreos: 
