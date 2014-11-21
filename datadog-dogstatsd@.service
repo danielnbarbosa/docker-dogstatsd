@@ -1,0 +1,20 @@
+[Unit]
+Description=datadog agent
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill dogstatsd
+ExecStartPre=-/usr/bin/docker rm dogstatsd
+ExecStartPre=/usr/bin/docker pull danielnbarbosa/docker-dogstatsd
+ExecStart=/usr/bin/bash -c \
+"/usr/bin/docker run --privileged --name dogstatsd -h `hostname` \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v /proc/mounts:/host/proc/mounts:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+-e API_KEY=`etcdctl get /ddapikey` \
+danielnbarbosa/docker-dogstatsd"
+
+[X-Fleet]
+Conflicts=datadog-dogstatsd@*.service
