@@ -9,12 +9,12 @@ dependencies:
   override:
     - docker info
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
-    - docker build -t danielnbarbosa/docker-dogstatsd .
-    - mkdir -p ~/docker; docker save danielnbarbosa/docker-dogstatsd > ~/docker/image.tar
+    - docker build -t danielnbarbosa/dogstatsd .
+    - mkdir -p ~/docker; docker save danielnbarbosa/dogstatsd > ~/docker/image.tar
 
 test:
   override:
-    - /bin/bash -c "/usr/bin/docker run -d --privileged --name dogstatsd -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/mounts:/host/proc/mounts:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=foo danielnbarbosa/docker-dogstatsd"
+    - /bin/bash -c "/usr/bin/docker run -d --privileged --name dogstatsd -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/mounts:/host/proc/mounts:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=foo danielnbarbosa/dogstatsd"
 
 deployment:
   coreos: 
